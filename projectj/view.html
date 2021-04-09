@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Product List</title>
+	</head>
+	<style>
+		table {
+		  font-family: arial, sans-serif;
+		  border-collapse: collapse;
+		  width: 100%;
+		}
+
+		td, th {
+		  border: 1px solid #dddddd;
+		  text-align: left;
+		  padding: 8px;
+		}
+
+		tr:nth-child(even) {
+		  background-color: #dddddd;
+		}
+		textarea#newreview {
+		    width: 100%;
+		}
+		ul#allreviews {
+		    overflow-y: scroll;
+		    height: 100px;
+		}
+	</style>
+
+	<body onload="displayProduct()">
+		<table>
+		<thead>
+			<tr>
+				<td colspan="2">
+					<h2>Item Details</h2>
+				</td>
+			</tr>
+			<tr>
+				<th ><a href="file:///var/www/html/shopping-cart/index.html">Home</a></th>
+				<th><a href="file:///var/www/html/shopping-cart/cart.html">Cart</a></th>
+			</tr>
+		</thead>
+		<tbody >
+			<tr>
+				<td>
+					<table id="details">
+							<tbody id="itemDetails"></tbody>
+					</table>
+				</td>
+				<td>
+					<form id="addReview">
+					<table id="details2">
+							<tbody id="itemReviews"></tbody>
+							<tfoot>
+								<tr>
+									<td colspan="2">
+										<textarea id="newreview" required></textarea>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">
+										<input type="submit" name="submit" value="Submit">
+									</td>
+								</tr>
+							</tfoot>
+					</table>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	</body>
+	<script type="text/javascript" src="functions.js"></script>
+	<script type="text/javascript">
+		var fullUrl= window.location.search
+		alert(fullUrl);
+		var pdId= fullUrl.match(/\d/g)[0];
+		
+		pdId= getItemPros(pdId)
+		var itemHTML="";
+
+		function displayProduct(){
+			itemHTML+= "<tr><td>ID:</td><td>"+pdId.id+"</td></tr>";
+			itemHTML+= "<tr><td>Name:</td><td>"+pdId.name+"</td></tr>";
+			itemHTML+= "<tr><td>Price: </td><td>$"+pdId.price+"</td></tr>";
+			itemHTML+= "<tr><td>Qty Available: </td><td>"+pdId.quantity+"</td></tr>";
+			itemHTML+= "<tr><td>Max Per Customer: </td><td>"+pdId.max_quantity+"</td></tr>";
+			itemHTML+= "<tr><td>Cost of Shipping: </td><td>$"+pdId.shipping_price+"</td></tr>";
+			itemHTML+= "<tr><td>Discription: </td><td>"+pdId.description+"</td></tr>";
+			let reviewshtml='<ul id="allreviews">';
+			let reviews= (pdId.reviews)
+			if(reviews.length > 0){
+				for(let i=0; i < (pdId.reviews).length; i++){
+					reviewshtml += "<li>"+reviews[i]+"</li>"
+				}
+			}
+			reviewshtml+="</ul>"
+			let itemHTML2= "<tr><td colspan='2'>Reviews:-</td></tr><tr><td colspan='2'>"+reviewshtml+"</td></tr>";
+			document.getElementById('itemDetails').innerHTML=itemHTML;	
+			document.getElementById('itemReviews').innerHTML=itemHTML2;	
+		}
+
+		document.getElementById("addReview").addEventListener("submit", function(e){
+			e.preventDefault()
+			let review= document.getElementById("newreview").value
+			let node=document.createElement("LI");
+			let nodeText= document.createTextNode(review)
+			node.appendChild(nodeText)
+			document.getElementById("allreviews").appendChild(node)
+			document.getElementById("newreview").value=""
+		})
+	</script>
+</html>

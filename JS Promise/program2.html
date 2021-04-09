@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<script>
+    var promise = new Promise(function(show,show1){
+        show("hello");
+    })
+    promise.then(function(SuccessMessage){
+        console.log(SuccessMessage);
+    },function(errorMessage){
+        console.log(errorMessage);
+    })
+</script>

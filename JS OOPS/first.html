@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<script>
+    class bank{
+        accno;
+        name;
+        balance;
+        set(){
+            this.accno = prompt("Enter value");
+            this.name = prompt("enter name");
+            this.balance = parseInt(prompt("Enter Balance"));
+        }
+        deposit(){
+            let n = parseInt(prompt("Enter Amount"));
+            this.balance = this.balance+n;
+        }
+        withdraw(){
+            let n = parseInt(prompt("Enter Amount"));
+            this.balance = this.balance-n;
+        }
+        show(){
+            document.write("<h1>"+this.accno+" "+this.name+" "+this.balance);    
+        }
+    }
+    var b1 = new bank();
+    b1.set();
+    b1.show();
+    b1.deposit();
+    b1.show();
+    b1.withdraw();
+    b1.show();
+</script>

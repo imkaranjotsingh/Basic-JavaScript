@@ -1,0 +1,20 @@
+<script language="javascript" type="text/javascript">
+    var images = new Array()
+    images[0] = "image1.jpg";
+    images[1] = "image2.jfif";
+    images[2] = "image3.jpg";
+    setInterval("changeImage()", 3000);
+    var x=0;
+
+    function changeImage()
+    {
+               document.getElementById("img").src=images[x]
+               x++;
+               if (images.length == x) 
+               {
+                   x = 0;
+               }
+    }
+</script>
+
+<img id="img" src="image1.jpg">

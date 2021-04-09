@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<script>
+    class book{
+        id;
+        name;
+        price;
+        b = [];
+        final;
+        setData(){
+            for(var i=1;i<=5;i++){
+                this.id = prompt("Enter the ID of "+i+" book");
+                this.name = prompt("Enter the name of "+ i +"Book");
+                this.price = parseInt(prompt("Enter the Price of "+ i +" book"));
+                this.b.push({id:this.id,name:this.name,price:this.price});
+            }  
+            this.final = JSON.stringify(this.b);
+        }
+        compare(){      
+            let c = JSON.parse(this.final)
+            document.write("<h1>"+"Books price above 600 </br></br>");
+            document.write("<h1>"+"ID    "+"Book Name   "+"Price");
+            for(var i=0;i<=this.b.length;i++){
+                if(c[i]["price"]>600){
+                    document.write("<h1>"+c[i]["id"]+"    "+c[i]["name"]+"    "+c[i]["price"]);
+                }
+            }         
+        }
+    }
+    var b = new book();
+    b.setData();
+    b.compare();
+</script>

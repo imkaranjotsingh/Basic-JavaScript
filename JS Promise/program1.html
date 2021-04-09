@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<script>
+    var promise = new Promise(function(resolve,reject){
+        const x = "oops";
+        const y = "oops";
+        if(x == y){
+            resolve();
+        }else{
+            reject();
+        }
+    });
+    promise.then(function(){
+        console.log('Success,You are a Student of OOps');
+    }).catch(function(){
+        console.log('Some erroe has occured');
+    });
+</script>

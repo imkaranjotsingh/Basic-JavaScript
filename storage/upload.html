@@ -1,0 +1,50 @@
+
+<script>
+	  function uploadImage(event) {
+            var reader = new FileReader();
+            var name = event.target.files[0].name;
+			alert(name);
+            reader.addEventListener("load", function () {
+                if (this.result && localStorage) {
+                    window.localStorage.setItem(name, this.result);
+                } else {
+                    alert();
+                }
+            });
+            reader.readAsDataURL(event.target.files[0]);
+			alert("www"+ reader.readAsDataURL(event.target.files[0]));
+        }
+		
+		function showImages() {
+            var img = document.getElementById("img");
+
+            var parentDiv = document.getElementById('preview');
+            if (parentDiv.contains(img)) {
+                parentDiv.prepend(img);
+            } else if (parentDiv.contains(img) == false) {
+                for (let i = 0; i < window.localStorage.length; i++) {
+					let res = window.localStorage.getItem(window.localStorage.key(i));
+                    var image = new Image();
+                    image.src = res;
+                    image.setAttribute('id', 'img');
+                    parentDiv.append(image);
+                }
+            }
+		}
+		
+</script>
+<div class="row">
+        <div class="input_box">
+
+            <label for="">
+                <input type="file" id="myFile" size="50" onchange="uploadImage(event)">
+            </label>
+        </div>
+        <button onclick="showImages()" style="justify-content: center;" class="btn btn-primary">
+            Show Images
+        </button>
+    </div>
+
+<div id="preview">
+
+</div>

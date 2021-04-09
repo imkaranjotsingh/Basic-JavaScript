@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<script>
+    class A{
+        display(){
+            document.write("A is invoked</br>");
+        }
+    }
+    class B extends A{
+        display(){
+            document.write("B is invoked");
+        }
+    }
+    var a = [new A(), new B()]
+    a.forEach(function(msg){
+        msg.display();
+    });
+</script>

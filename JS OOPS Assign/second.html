@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<script>
+    class highestDistance{
+        meter;
+        cm;
+        setData(){
+            this.meter = parseInt(prompt("Enter Meters"));
+            this.cm = parseInt(prompt("Enter Cm"));
+            document.write("<h1>"+"You Set Data in meters is: "+this.meter);
+            document.write("<h1>"+"You set Data in Cm is: "+this.cm);
+        }
+        distance(){
+            this.meter = this.meter*100;
+            if(this.meter>this.cm){
+                document.write("<h1>"+"Meter Bigger: "+this.meter/100);
+            }else{
+                document.write("<h1>"+"Centimeter Bigger: "+this.cm);
+            }
+        }
+    }
+    var dis = new highestDistance();
+    dis.setData(3.5,350);
+    dis.distance();
+</script>

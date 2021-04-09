@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<body>
+    <table class = "details">
+        <thead>
+            <tr>
+                <th>USER Name</th>
+                <th>Passwords</th>
+            </tr>
+        </thead>
+        <tbody id="bc"></tbody>
+    </table>
+</body>
+<!--<script src = "script.js"></script>!-->
+<input type = button onclick="getAllitems()" value="clickme">
+
+<script>
+    lista = " ";
+    function getAllitems(){
+        for(i = 0 ; i <= localStorage.length-1 ; i++){
+            let res = window.localStorage.getItem(window.localStorage.key(i));
+            console.log(res);
+            cartitems = JSON.parse(res);
+            cartitems.forEach(function(key,value) {
+                lista += "<tr><td>"+"<tr><td>"+key.name+"</td><td>"+key.password+"</td></td></tr>";
+            })
+        }
+        document.getElementById('bc').innerHTML = lista;
+    }
+</script>

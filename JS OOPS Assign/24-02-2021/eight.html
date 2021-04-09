@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<script>
+    cart = [];
+    function save(){  
+        var name=document.myform.username.value;  
+        var password=document.myform.password.value;  
+        var address = document.myform.address.value;
+        var city = document.myform.city.value;
+        var phoneno = document.myform.phoneno.value;      
+        if (name==null || name==""){  
+            alert("UserName can't be blank");  
+            return false;  
+        }
+        else if(password.length<6){  
+            alert("Password must be at least 6 characters long.");  
+            return false;  
+        }
+        else if(address==null || address==""){  
+            alert("Address can't be blank");  
+            return false;    
+        }
+        else if(city==null || city==""){  
+            alert("City can't be blank");  
+            return false;
+        }
+        console.log(name);
+        console.log(password);
+        console.log(address);
+        console.log(city);
+        console.log(phoneno);
+        cart.push({name:name,password:password,address:address,city:city,phoneno:phoneno});
+        localStorage.setItem('user',JSON.stringify(cart));
+    }
+    function uploadImage(event) {
+            var reader = new FileReader();
+            var name = event.target.files[0].name;
+			alert(name);
+            reader.addEventListener("load", function () {
+                if (this.result && localStorage) {
+                    window.localStorage.setItem(name, this.result);
+                } else {
+                    alert();
+                }
+            });
+            reader.readAsDataURL(event.target.files[0]);
+			//alert("www"+ reader.readAsDataURL(event.target.files[0]));
+        }
+		
+		
+</script>  
+    <body>
+        <h1>Register</h1>  
+    <form name="myform" method="post" action="eight.html" onsubmit="save()" >  
+    UserName: <input type="text" name="username"><br/>  
+    Password: <input type="password" name="password"><br/>
+    Address: <input type="text" name="address"><br/>
+    City: <input type="text" name="city"><br/>
+    Phone NO: <input type="text" name="phoneno"></br>
+    <label for="">
+        <input type="file" id="myFile" size="50" onchange="uploadImage(event)">
+    </label>
+    <input type="submit" value="register"><br/>
+    <input type="button" onclick="location.href='file:///C:/Users/Karan%20Singh/Desktop/Java%20Script/JS%20OOPS%20Assign/24-02-2021/table.html'" value="show data">  
+    </form> 
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<script>
+    class Test{
+        a = 1;
+        #b = 2;
+        static #c = 3;
+        incB(){
+            this.#b++;
+        }
+    }
+    const testInstance = new Test();
+    testInstance.incB();
+    testInstance.#b;
+</script>

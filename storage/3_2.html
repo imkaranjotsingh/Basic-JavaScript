@@ -1,0 +1,31 @@
+
+<div id="demo"></div>
+<div id ="rn"></div>
+<div id="preview"></div>
+
+<script type="text/javascript" src='script.js'></script>
+
+<script>
+
+//alert(emp);
+var img = document.getElementById("img");
+            var parentDiv = document.getElementById('preview');
+            if (parentDiv.contains(img)) {
+                parentDiv.prepend(img);
+            } else if (parentDiv.contains(img) == false) {
+                for (let i = 0; i < window.localStorage.length; i++) {
+					let res = window.localStorage.getItem(window.localStorage.key(i));
+                    var image = new Image();
+                    image.src = res;
+                    image.setAttribute('id', 'img');
+                    parentDiv.append(image);
+                }
+            }
+			
+var getdata = window.localStorage.getItem('user');
+var rollnumber = window.localStorage.getItem('rollno');
+document.getElementById('demo').innerHTML="Welcome "+getdata;
+document.getElementById('rn').innerHTML="Your Roll No is:"+rollnumber;
+</script>
+
+

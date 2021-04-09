@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<body>
+    <div id="preview"></div>
+    <div id ="img"></div>
+    <table class = "details">
+        <thead>
+            <tr>
+                <th>USER Name &nbsp</th></br>
+                <th>Passwords &nbsp</th>
+                <th>Address&nbsp</th>
+                <th>City &nbsp</th>
+                <th>Phone No</th>
+            </tr>
+        </thead>
+        <tbody id="bc"></tbody>
+    </table>
+</body>
+<!--<script src = "script.js"></script>!-->
+<input type = button onclick="getAllitems();showImages();" value="Show">
+
+<script>
+    lista = " ";
+    function getAllitems(){
+        for(i = 1 ; i <= localStorage.length-1 ; i++){
+            let res = window.localStorage.getItem(window.localStorage.key(i));
+            console.log(res);
+            cartitems = JSON.parse(res);
+            cartitems.forEach(function(key,value) {
+                lista += "<tr><td>"+"<tr><td>"+key.name+"</td><td>"+"<td>"+key.password+"</td><td>"+key.address+"</td><td>"+"</td><td>"+key.city+"</td><td>"+"</td><td>"+key.phoneno+"</td></td></tr>";
+            })
+        }
+        document.getElementById('bc').innerHTML = lista;
+    }
+    function showImages() {
+            var img = document.getElementById("img");
+
+            var parentDiv = document.getElementById('preview');
+            if (parentDiv.contains(img)) {
+                parentDiv.prepend(img);
+            } else if (parentDiv.contains(img) == false) {
+                for (let i = 0; i < window.localStorage.length; i++) {
+					let res = window.localStorage.getItem(window.localStorage.key(i));
+                    var image = new Image();
+                    image.src = res;
+                    image.setAttribute('id', 'img');
+                    parentDiv.append(image);
+                }
+            }
+		}
+</script>

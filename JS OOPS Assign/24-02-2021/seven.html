@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<script>
+    first = prompt("Enter the first Number");
+    second = prompt("Enter the Second Number");
+    function add(a,b,callback){
+        let sum = parseInt(a)+parseInt(b);
+        callback(sum);
+    }
+    function display(some){
+        document.write("<h1>"+"Sum: "+some);
+    }
+add(first,second,display);
+
+</script>

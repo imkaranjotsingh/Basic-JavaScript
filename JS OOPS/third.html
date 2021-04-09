@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<script>
+    class employee{
+        empno;
+        name;
+        salary;
+        setemp(e,n,sal){
+            this.empno = e;
+            this.name = n;
+            this.salary = sal;
+        }
+        show(){
+            document.write("<h1>"+this.empno+" "+this.name+" "+this.salary);
+        }
+    }
+    var e1 = new employee();
+    e1.setemp(101,"ajay",4000);
+    var e2 = new employee();
+    e2.setemp(102,"vijay",5000);
+    if(e1.salary > e2.salary){
+        e1.show();
+    }else{
+        e2.show();
+    }
+
+</script>

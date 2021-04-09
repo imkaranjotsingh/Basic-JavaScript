@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<script>
+    var promise = new Promise(function(resolve,reject){
+        setTimeout(function(){
+            resolve("Hello world 1");
+            resolve("Hello world 2");
+            resolve("Hello world 3");
+            resolve("Hello world 4");
+        },1000);
+    });
+    promise.then(function success(data){
+        console.log(data);
+    });
+</script>

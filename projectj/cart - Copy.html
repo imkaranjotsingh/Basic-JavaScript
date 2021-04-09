@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Product List</title>
+	</head>
+	<style>
+		table {
+		  font-family: arial, sans-serif;
+		  border-collapse: collapse;
+		  width: 100%;
+		}
+		table.details{
+			width: 100%
+		}
+		td, th {
+		  border: 1px solid #dddddd;
+		  text-align: left;
+		  padding: 8px;
+		  width: 40px;
+		}
+
+		tr:nth-child(even) {
+		  background-color: #dddddd;
+		}
+		textarea#newreview {
+		    width: 100%;
+		}
+		ul#allreviews {
+		    overflow-y: scroll;
+		    height: 100px;
+		}
+		input[type='number'] {
+		    width: 40px;
+		}
+		#subTotals td:nth-child(2) {
+		    text-align: right;
+		}
+
+	</style>
+
+	<body onload="displayCartItems()">
+		<table>
+		<thead>
+			<tr>
+				<td colspan="3">
+					<h2>Cart Listing</h2>
+				</td>
+			</tr>
+			<tr>
+				<th colspan="2"><a href="index.html">Home</a></th>
+				<th><a href="cart.html">Cart</a></th>
+			</tr>
+		</thead>
+		<tbody >
+			<tr>
+				<td></td>
+				<td>
+					<table class="details">
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Item</th>
+								<th>price</th>
+								<th>Qty</th>
+								<th>Shipping charges</th>
+								<th>Sub total</th>
+								<th>Remove</th>
+							</tr>
+						</thead>
+						<tbody id="cartitems"></tbody>
+					</table>
+										<table class="details">
+						<tbody id="subTotals"></tbody>
+					</table>
+				</td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	</body>
+<script type="text/javascript" src="functions.js"></script>
+<script type="text/javascript">
+	
+	let cartitems= [];
+	var lista=''
+	var count=1
+	var totalQty=0
+	var totalShPrice=0;
+	var totalPrice= 0;
+
+	function displayCartItems(){
+		cartitems= getCartItems()
+		document.getElementById("cartitems").innerHTML=""
+		if (cartitems.length > 0) {
+			
+			cartitems.forEach(function(key,value){
+				 lista +="<tr><td>"+key.id+"</td><td>"+key.name+"</td><td>$"+key.price+"</td><td><input id='number_"+key.id+"' type='number' min='1' value="+key.qty+" onchange='updateCartItem("+count+")'></td><td>$"+key.shipping_price+"</td><td>$"+(key.price*key.qty).toFixed(2)+"</td><td><button onclick='removeItem("+key.id+")'>Remove</button></td></tr>"
+				count++
+				totalQty+= Number(key.qty)
+				totalShPrice+= Number(key.shipping_price)
+				totalPrice+= Number(key.price)* totalQty
+			})
+			
+			let subtotalsH ="<tr><td colspan='4'>Total Items: <td><td id='totalQty'>"+totalQty+"</td></tr>"
+			subtotalsH +="<tr><td colspan='4'>Items Subtotal: <td>$<td id='totalPrice'>"+totalPrice.toFixed(2)+"</td></tr>"
+			 subtotalsH +="<tr><td colspan='4'>Estimated Shipping Cost: </td><td>$</td><td id='totalShPrice'>"+totalShPrice.toFixed(2)+"</td></tr>"
+			subtotalsH +="<tr><td colspan='4'>Estimated Subtotal: <td>$<td id='fullTotal'>"+(totalPrice + totalShPrice).toFixed(2)+"</td></tr>"
+			subtotalsH +="<tr><td colspan='4'>Estimatd Tax: <td>$<td id='orderTax'>"+(totalPrice % 20).toFixed(2)+"</td></tr>"
+			subtotalsH +="<tr><td colspan='2'><button onclick='clearCart()'>Submit Order</button></td><td colspan='2'>Order Total:</td><td>$</td><td id='OrderfullTotal'>"+(totalPrice + totalShPrice + (totalPrice % 20)).toFixed(2)+"</td></tr>"
+			document.getElementById("subTotals").innerHTML=subtotalsH
+		}else{
+			lista="<tr><td colspan='6'>No cart item available. <td></tr>"
+		}
+		document.getElementById("cartitems").innerHTML=""
+		document.getElementById("cartitems").innerHTML=lista
+
+	}
+
+	// Update cart item 
+	function updateCartItem(id){
+		let max_quantity= getItemPros(id,"max_quantity")
+		singleItem= document.getElementsByTagName("tr")[id+3]
+		let qty= Number((singleItem.children[3]).getElementsByTagName("input")[0].value)
+		if (max_quantity >= qty ) {
+
+			let subtotal =Number((singleItem.children[2].innerHTML).replace("$","")) * qty;
+			singleItem.children[5].innerHTML=subtotal.toFixed(2)
+			cartitems[id-1].qty=qty;
+			localStorage.setItem("Cart",JSON.stringify(cartitems));
+			updateCartFooter();
+		}else{
+			(singleItem.children[3]).getElementsByTagName("input")[0].value= --qty;
+			alert("you can only select "+max_quantity+ " for this product.")
+			return;
+		}
+	}
+
+	// Update cart totals
+	function updateCartFooter(){
+		let cartitems= JSON.parse(localStorage.getItem("Cart"));
+		var totalQty=0
+		var totalShPrice=0;
+		var totalPrice= 0;
+		cartitems.forEach(function(key,value){
+			totalQty+= Number(key.qty)
+			totalShPrice+= Number(key.shipping_price)
+			totalPrice+= Number(key.price)*key.qty
+		})
+
+		let tax= document.getElementById("orderTax").innerHTML
+		document.getElementById("totalQty").innerHTML=totalQty
+		document.getElementById("totalShPrice").innerHTML=totalShPrice.toFixed(2)
+		document.getElementById("totalPrice").innerHTML=totalPrice.toFixed(2)
+		document.getElementById("fullTotal").innerHTML=(totalPrice+totalShPrice).toFixed(2)
+		let fullTotal= Number(totalPrice+totalShPrice)+ Number(tax)
+		document.getElementById("OrderfullTotal").innerHTML= fullTotal.toFixed(2)
+	}
+
+	// remove single item from cart
+	function removeItem(id){
+		let cartitems= JSON.parse(localStorage.getItem("Cart"));
+		for(let i=0; i < (cartitems.length); i++){
+			console.log(cartitems[i].id,typeof(cartitems[i].id), id, typeof(id))
+			if(cartitems[i].id === id){
+				cartitems.splice(i,1)
+				localStorage.setItem("Cart", JSON.stringify(cartitems))
+				window.location.reload()
+				break;
+			}
+		}
+	}
+
+	// Summit order and clear cart
+	function clearCart(){
+		localStorage.removeItem("Cart");
+		window.location.reload();
+		alert("Thank for shopping. :)");
+
+	}
+</script>
+</html>

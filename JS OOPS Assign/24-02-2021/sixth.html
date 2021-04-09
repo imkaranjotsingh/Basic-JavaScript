@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<script>
+    class book{
+        bname;
+        price;
+        constructor(bn,price){
+            this.bname = bn;
+            this.price = price;
+        }
+        show(){
+            document.write("<h1>"+"Book Name:"+this.bname);
+            document.write("<h1>"+"Price:"+this.price);
+        }
+    }
+    class author extends book{
+        auth;
+        constructor(bname,price,aname){
+            super(bname,price);
+            this.auth = aname;
+        }
+        show(){
+            super.show();
+            document.write("<h1>"+"Author:"+this.auth);
+        }
+    }
+    class publisher extends author{
+        pname;
+        location;
+        constructor(bname,price,aname,pname,location){
+            super(bname,price,aname);
+            this.pname = pname;
+            this.location = location;
+        }
+        show(){
+            super.show();
+            document.write("<h1>"+"Publisher:"+this.pname);
+            document.write("<h1>"+"Publisher location:"+this.location);
+        }
+    }
+    class customer extends publisher{
+        cname;
+        email;
+        constructor(bname,price,aname,pname,location,cname,email){
+            super(bname,price,aname,pname,location);
+            this.cname = cname;
+            this.email = email;
+        }
+        show(){
+            super.show();
+            document.write("<h1>"+"Customer:"+this.cname);
+            document.write("<h1>"+"Email:"+this.email);
+        }
+    }
+    var c = new customer("ABC",500,"XYZ","qwert","India","james","james@gmail.com");
+    //c.setbook("ABC",500);
+    //c.setauthor("XYZ");
+    //c.setpublisher("qwert","India");
+    //c.setcustomer("james"," james@gmail.com");
+    c.show();
+</script>

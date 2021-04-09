@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<script>
+    class course{
+        cname;
+        code;
+        fee;
+        set(cn,cd,f){
+            this.cname = cn;
+            this.code = cd;
+            this.fee = f;
+        }
+        show(){
+            document.write("<h1>"+this.cname+" "+this.code+" "+this.fee);
+        }
+    }
+    class student extends course{
+        rollno;
+        setstud(r){
+            this.rollno = r;
+        }
+        show(){
+            document.write("<h1>"+this.rollno);
+        }
+    }
+    class institute extends student{
+        iname;
+        setname(nn){
+            this.iname = nn;
+        }
+        show(){
+            super.show();
+            document.write("<h1>"+this.iname);
+        }
+    }
+    var k = new institute();
+    k.set("php",1,4000);
+    k.setstud(10);
+    k.setname("abc ltd");
+    k.show();
+</script>

@@ -1,0 +1,35 @@
+<script>
+	  function uploadImage(event) {
+            var reader = new FileReader();
+            var name = event.target.files[0].name;
+			//alert(name);
+            reader.addEventListener("load", function () {
+                if (this.result && localStorage) {
+                    window.localStorage.setItem(name, this.result);
+                } else {
+                    alert();
+                }
+            });
+            reader.readAsDataURL(event.target.files[0]);
+			//alert("www"+ reader.readAsDataURL(event.target.files[0]));
+        }
+</script>
+<script type="text/javascript" src='script.js'></script>
+<div class="row">
+        <div class="input_box">
+			<form name='f'>
+				name:<input type="text" name="user">
+			<br>
+				Roll No:<input type="text" name="rollno">
+			<br>	
+			</form>
+            <label for="">
+                <input type="file" id="myFile" size="50" onchange="uploadImage(event)">
+            </label>
+        </div>
+        <button onclick="showImages()" style="justify-content: center;" class="btn btn-primary">
+            Show Images
+        </button>
+    </div>
+
+

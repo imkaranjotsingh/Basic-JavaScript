@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Product List</title>
+	</head>
+	<style>
+		table {
+		  font-family: arial, sans-serif;
+		  border-collapse: collapse;
+		  width: 100%;
+		}
+
+		td, th {
+		  border: 1px solid #dddddd;
+		  text-align: left;
+		  padding: 8px;
+		}
+
+		tr:nth-child(even) {
+		  background-color: #dddddd;
+		}
+	</style>
+
+	<body>
+		<table>
+			<tr>
+				<td colspan="9">
+					<h2>Welcome to Our Shopping cart</h2>
+				</td>
+			</tr>
+			<tr>
+				<th colspan="8"><a href="index.html">Home</a></th>
+				<th><a href="cart.html">Cart</a></th>
+			</tr>
+			<tr>
+				<th colspan="9">
+					<select id="category" onchange="getChnagedProducts()"></select>
+				</th>
+			</tr>
+	  		<tr>
+			    <th>Id</th>
+			    <th>Name</th>
+			    <th>Price</th>
+			    <th>Quantity</th> 
+			    <th>Max Per Cart</th> 
+			    <th>Category</th> 
+			    <th>Image</th> 
+			    <th>View</th> 
+			    <th>Action</th> 
+	  		</tr>
+	  		<tbody id="product_list"></tbody>
+		</table>	
+	</body>
+	<script type="text/javascript" src="functions.js"></script>
+	<script type="text/javascript">
+setProducts();
+	</script>
+</html>

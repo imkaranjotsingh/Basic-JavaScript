@@ -1,0 +1,15 @@
+<script>
+
+let main= 'india is great country and i will work towards making our country the better india'
+
+let newline= main.split(' ');
+const duplicates = newline.filter((el, index) => newline.indexOf(el) !== index)
+
+const unique = newline.filter(n=>!duplicates.includes(n))
+
+let uniqueSort= unique.sort((a, b) => b.length - a.length)
+
+let all=[...duplicates,...uniqueSort]
+
+console.log(all.join())
+</script>

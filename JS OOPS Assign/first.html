@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<script>
+    class student{
+        rollno;
+        name;
+        m1;
+        m2;
+        m3;
+        avgsc;
+        getdata(){
+            this.rollno = prompt("Enter your Roll Number");
+            this.name = prompt("Enter your Name");
+            this.m1 = parseInt(prompt("Enter your 1st Subject marks"));
+            this.m2 = parseInt(prompt("Enter your 2st Subject marks"));
+            this.m3 = parseInt(prompt("Enter your 3st Subject marks"));
+        }
+        total(){
+            var sum = this.m1+this.m2+this.m3;
+            document.write("<h1>"+"Total marks U scored in 3 subjects are: "+sum);
+        }
+        avg(){
+            this.avgsc = (this.m1+this.m2+this.m3)/3;
+            document.write("<h1>"+"Average marks U scored in 3 subjects are: "+this.avgsc);
+        }
+        grad(){
+            if(this.avgsc > 80){
+                document.write("<h1>"+"You GOT  'S'  GRADE ");
+            }else if(this.avgsc > 60 && this.avgsc < 80){
+                document.write("<h1>"+"YOU GOT  'A'  GRADE");
+            }else if(this.avgsc > 50 && this.avgsc < 60){
+                document.write("<h1>"+"YOU GOT  'B'  GRADE");
+            }else{
+                document.write("<h1>"+"YOU GOT  'F'  GRADE");
+            }
+        }
+    }
+    var s1 = new student();
+    s1.getdata();
+    s1.total();
+    s1.avg();
+    s1.grad();
+</script>

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<script>
+    class test{
+        constructor(){
+            document.writeln(test.display()+"</br>");
+            document.writeln(this.constructor.display());
+        }
+        static display(){
+            return "static method is invoked"
+        }
+    }
+    var t = new test();
+</script>

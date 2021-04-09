@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<script>
+    class book{
+        bname;
+        price;
+        setbook(bn,price){
+            this.bname = bn;
+            this.price = price;
+        }
+        show(){
+            document.write("<h1>"+"Book Name:"+this.bname);
+            document.write("<h1>"+"Price:"+this.price);
+        }
+    }
+    class author extends book{
+        auth;
+        setauthor(authname){
+            this.auth = authname;
+        }
+        show(){
+            super.show();
+            document.write("<h1>"+"Author:"+this.auth);
+        }
+    }
+    class publisher extends author{
+        publishname;
+        setpublisher(pubname){
+            this.publishname = pubname;
+        }
+        show(){
+            super.show();
+            document.write("<h1>"+"Publisher:"+this.publishname);
+        }
+    }
+    class customer extends publisher{
+        cname;
+        email;
+        setcustomer(customname,email){
+            this.cname = customname;
+            this.email = email;
+        }
+        show(){
+            super.show();
+            document.write("<h1>"+"Customer:"+this.cname);
+            document.write("<h1>"+"Email:"+this.email);
+        }
+    }
+    var c = new customer();
+    c.setbook("ABC",500);
+    c.setauthor("XYZ");
+    c.setpublisher("qwert");
+    c.setcustomer("james"," james@gmail.com");
+    c.show();
+</script>
